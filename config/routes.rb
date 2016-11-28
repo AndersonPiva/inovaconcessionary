@@ -14,13 +14,10 @@ Rails.application.routes.draw do
     resources :categories, path: 'categorias'
     resources :vehicles, path: 'veiculos'
   end
-  match '/admin/modelos/autocomplete', to: 'models#autocomplete', via: [:get]
-  match '/admin/categorias/autocomplete', to: 'categories#autocomplete', via: [:get]
   match '/contato', to: 'contacts#new', via: [:get]
   match '/sobre', to: 'publics#about', via: [:get]
   match '/admin/stock_option', to: 'privates#stock_or_new', via: [:get]
   match '/veiculos/:id', to: 'vehicles#show', via: [:get]
-  match '/autocomplete', to: 'vehicles#autocomplete', via: [:get]
   match '/search', to: 'searchs#search', via: [:get]
   match '/promocoes', to: 'vehicles#offers', via: [:get]
   match "/404" => "errors#error404", via: [ :get, :post, :patch, :delete ]

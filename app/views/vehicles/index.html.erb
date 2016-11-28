@@ -95,7 +95,7 @@
           </div>
         </div>
       </div>
-      <% if !@vehicles.blank? %>
+      <% if !@vehicles_promotion.blank? %>
       <div class="row">
         <div class="col-xs-12" id="slider">
           <div class="row">
@@ -103,7 +103,7 @@
               <div class="carousel slide" id="myCarousel">
                 <div class="carousel-inner">
                   <% aux = 0 %>
-                  <% @vehicles.each do |vehicle| %>
+                  <% @vehicles_promotion.each do |vehicle| %>
                   <% vehicle.images.each do |image| %>
                   <% if aux == 0 %>
                   <div class="active item">

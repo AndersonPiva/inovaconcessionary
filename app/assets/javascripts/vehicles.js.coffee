@@ -7,8 +7,3 @@ $ ->
     return unless visible
 
     $.getScript $(this).attr('href')
-
-$ ->
-  $('#vehicle_search').typeahead
-    name: "vehicle"
-    remote: "/autocomplete?query=%QUERY"
