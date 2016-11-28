@@ -58,10 +58,6 @@ class VehiclesController < ApplicationController
     end
   end
 
-  def autocomplete
-      render json: Vehicle.search(params[:query], autocomplete: true, limit: 10).map(&:title)
-  end
-
   def create
     if current_user.present?
       @vehicle = Vehicle.new(vehicle_params)

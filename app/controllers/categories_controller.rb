@@ -7,15 +7,11 @@ class CategoriesController < ApplicationController
     @total_categories = @categories.size
     flash[:notice] = nil
     if params[:query].present?
-     @categories = Category.search(params[:query])
+     @categories = Category.where('name iLIKE ?', "%#{params[:query]}%")
      @total_categories = @categories.size
    else
      flash[:notice] = ''
    end
-  end
-
-  def autocomplete
-    render json: Category.search(params[:query], autocomplete: true, limit: 10).map(&:name)
   end
 
   def create

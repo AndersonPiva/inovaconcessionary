@@ -7,15 +7,11 @@ class ModelsController < ApplicationController
     @models = Model.all
     @total_models = @models.size
     if params[:query].present?
-     @models = Model.search(params[:query])
+     @models = Model.where('name iLIKE ?', "%#{params[:query]}%")
      @total_models = @models.size
    else
      flash[:notice] = ''
    end
-  end
-
-  def autocomplete
-    render json: Model.search(params[:query], autocomplete: true, limit: 10).map(&:name)
   end
 
   def create
