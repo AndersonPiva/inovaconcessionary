@@ -1,0 +1,160 @@
+<%= render 'shared/nav' %>
+<div class="page-container">
+  <div class="content">
+    <div class="container">
+      <div class="page-content">
+        <div class="panel panel-default col-xs-12">
+          <div class="panel-body">
+            <div class="col-xs-12 col-sm-6">
+              <h2 class="pull-left">
+                Temos
+                <%= @total_vehicles %>
+                veículos disponíveis hoje.</h2>
+            </div>
+            <div class="hidden-xs col-sm-6">
+              <img alt="crevolet logo" class="pull-right" src="/assets/chevrolet.png"/>
+              <img alt="fiat logo" class="pull-right" src="/assets/fiat.jpg">
+              <img alt="volkswagen logo" class="pull-right" src="/assets/volkswagen.jpg"/>
+              <img alt="ford logo" class="pull-right" src="/assets/ford.jpg"/>
+              <img alt="renault logo" class="pull-right" src="/assets/renault.png">
+              <img alt="honda logo" class="pull-right" src="/assets/honda.png"/>
+              <img alt="toyota logo" class="pull-right" src="/assets/toyota.jpeg"/>
+            </div>
+          </div>
+        </div>
+        <% if flash[:add] != nil %>
+        <div class="col-xs-12 alert alert-warning alert-dismissible" role="alert">
+          <button class="close" data-dismiss="alert" type="button">
+            <span aria-hidden="true">&times;</span>
+            <span class="sr-only">Close</span>
+          </button>
+          <strong>Veículo adicionado aos destaques.</strong>
+        </div>
+        <% end %>
+        <% if flash[:warning] != nil %>
+        <div class="col-xs-12 alert alert-warning alert-dismissible" role="alert">
+          <button class="close" data-dismiss="alert" type="button">
+            <span aria-hidden="true">&times;</span>
+            <span class="sr-only">Close</span>
+          </button>
+          <strong>Veículo removido dos destaques.</strong>
+        </div>
+        <% end %>
+        <% if flash[:info] != nil %>
+        <div class="col-xs-12 alert alert-warning alert-dismissible" role="alert">
+          <button class="close" data-dismiss="alert" type="button">
+            <span aria-hidden="true">&times;</span>
+            <span class="sr-only">Close</span>
+          </button>
+          <strong>Veículo removido do estoque.</strong>
+        </div>
+        <% end %>
+        <% if flash[:error] != nil %>
+        <div class="col-xs-12 alert alert-warning alert-dismissible" role="alert">
+          <button class="close" data-dismiss="alert" type="button">
+            <span aria-hidden="true">&times;</span>
+            <span class="sr-only">Close</span>
+          </button>
+          <strong>Veículo adicionado ao estoque.</strong>
+        </div>
+        <% end %>
+        <% if flash[:update] != nil %>
+        <div class="col-xs-12 alert alert-warning alert-dismissible" role="alert">
+          <button class="close" data-dismiss="alert" type="button">
+            <span aria-hidden="true">&times;</span>
+            <span class="sr-only">Close</span>
+          </button>
+          <strong>Veículo atualizado com sucesso.</strong>
+        </div>
+        <% end %>
+        <div class="panel panel-default col-xs-12">
+          <div class="panel-body">
+            <div class="text-center">
+              <h5>
+                <strong>
+                  <i class="fa fa-search"></i>
+                  Encontre o veículo dos seus sonhos:</strong>
+              </h5>
+            </div>
+            <div class="form-horizontal">
+              <div class="form-group">
+                <div class="col-xs-12">
+                  <%= form_tag "/search", method: :get do %>
+                  <%= text_field_tag :query, params[:query], class: "form-control input-md", :placeholder => 'Que veículo você está procurando?', autocomplete: "off", id: "vehicle_search" %>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-xs-12 col-sm-4 col-sm-offset-5">
+                  <button class="btn btn-primary" type="submit">
+                    <i class="fa fa-search"></i>
+                    Pesquisar</button>
+                </div>
+              </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% if !@vehicles.blank? %>
+      <div class="row">
+        <div class="col-xs-12" id="slider">
+          <div class="row">
+            <div class="col-xs-12" id="carousel-bounding-box">
+              <div class="carousel slide" id="myCarousel">
+                <div class="carousel-inner">
+                  <% aux = 0 %>
+                  <% @vehicles.each do |vehicle| %>
+                  <% vehicle.images.each do |image| %>
+                  <% if aux == 0 %>
+                  <div class="active item">
+                    <a href="/veiculos/<%= vehicle.to_param %>" title="Ver Mais"><%= image_tag image.cover %></a>
+                  </div>
+                  <% aux = 1 %>
+                  <% break %>
+                  <% else %>
+                  <div class="item">
+                    <a href="/veiculos/<%= vehicle.to_param %>" title="Ver Mais"><%= image_tag image.cover %></a>
+                  </div>
+                  <% break %>
+                  <% end %>
+                  <% end %>
+                  <% end %>
+                </div>
+                <a class="left carousel-control" data-slide="prev" href="#myCarousel" role="button">
+                  <span class="fa fa-chevron-left fa-3x"></span>
+                </a>
+                <a class="right carousel-control" data-slide="next" href="#myCarousel" role="button">
+                  <span class="fa fa-chevron-right fa-3x"></span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% end %>
+      <hr/>
+      <% if !@vehicles.blank? %>
+      <h4>
+        <strong>Nossos veículos</strong>
+      </h4>
+      <div class="vehicles">
+        <%= render partial: 'vehicles/vehicles', locals: {vehicles: @vehicles} %>
+      </div>
+      <% if @vehicles.next_page %>
+      <div class="col-xs-12 text-center">
+        <a class="load-more-vehicles" data-remote="true" href="/veiculos?page=<%= @vehicles.next_page %>"><img src="/assets/load.gif"/></a>
+      </div>
+      <% end %>
+      <% else %>
+      <div class="panel panel-default col-xs-12">
+        <div class="panel-body">
+          <h5>
+            <strong>Infelizmente ainda não temos nenhum veículo em estoque, retorne mais tarde.</strong>
+          </h5>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+  <%= render 'shared/footer' %>
+</div>

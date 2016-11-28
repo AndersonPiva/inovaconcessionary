@@ -1,0 +1,45 @@
+<%= render 'shared/nav' %>
+<div class="page-container">
+  <div class="content">
+    <div class="container">
+      <ul class="list-inline page-content">
+        <li>
+          <a href="/" title="Home"><i class="fa fa-home fa-2x"></i></a>
+        </li>
+        <li class="lead">
+          >
+        </li>
+        <li>
+          <i class="fa fa-search fa-2x" title="Resultados da pesquisa"></i>
+        </li>
+      </ul>
+      <% if flash[:notice] != nil %>
+      <div class="panel panel-default col-xs-12">
+        <div class="panel-body">
+          <h5>Por favor digite algum termo relacionado ao veículo na caixa de pesquisa.</h5>
+        </div>
+      </div>
+      <% else %>
+        <% if @vehicles.blank? %>
+          <div class="panel panel-default col-xs-12">
+            <div class="panel-body">
+              <h3>Não foi encontrado nenhum veículo com o termo pesquisado. Por favor tente novamente.</h3>
+            </div>
+          </div>
+        <% else %>
+        <div class="panel panel-default col-xs-12">
+          <div class="panel-body">
+            <h2>
+              <i class="fa fa-automobile"></i>
+              Foram encontrados
+              <%= @total_vehicles%>
+              veículos com o termo pesquisado.</h2>
+          </div>
+        </div>
+        <%= render partial: 'vehicles/vehicles', locals: {vehicles: @vehicles} %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <%= render 'shared/footer' %>
+</div>

@@ -1,0 +1,42 @@
+<%= render 'shared/nav' %>
+<div class="page-container">
+  <div class="content">
+    <div class="container">
+      <div class="page-content">
+        <ul class="list-inline">
+          <li>
+            <a href="/" title="Home">
+              <i class="fa fa-home fa-2x"></i>
+            </a>
+          </li>
+          <li class="lead">
+            >
+          </li>
+          <li>
+            <i class="fa fa-warning fa-2x" title="Página não encontrada"></i>
+          </li>
+        </ul>
+        <div class="panel panel-default col-xs-12 notfound-contentt">
+          <div class="panel-body">
+            <div class="error-page">
+              <h2 class="headline text-danger">
+                404</h2>
+              <div class="error-content">
+                <br/>
+                <h3 class="text-danger">
+                  <i class="fa fa-warning"></i>
+                  Oops! Página Não Encontrada.</h3>
+                <p class="text-danger">
+                  A página que você buscou infelizmente não existe no nosso website!
+                  <br/>
+                  <%= link_to 'Retornar a página inicial', root_path %>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%= render 'shared/footer' %>
+</div>

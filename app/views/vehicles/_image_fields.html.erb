@@ -1,0 +1,23 @@
+<div class="nested-fields">
+  <div class="col-xs-12">
+    <div id="div_file">
+    <img alt="img_default" src="/assets/camera-plus.png" id="img_prev" />
+    <%= link_to_remove_association '', f, title: 'Remover', class: "fa fa-times-circle", :id => 'delete-photo' %>
+    <%= f.file_field :cover, as: :file, class:'btn_enviar', :onchange => 'readURL(this);'%>
+    </div>
+  </div>
+</div>
+<script>
+function readURL(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          $('#img_prev')
+            .attr('src', e.target.result)
+            .width(150)
+            .height(150);
+        };
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+</script>

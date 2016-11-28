@@ -1,0 +1,40 @@
+<% vehicles.each do |vehicle| %>
+<div class="panel panel-default col-xs-12 col-sm-3">
+  <div class="panel-body">
+    <div class="text-center">
+      <a href="/veiculos/<%= vehicle.to_param %>">
+        <% vehicle.images.each do |image| %>
+        <%= image_tag image.cover.url(:medium), class: 'img-thumbnail' %>
+        <% break %>
+        <% end %>
+        <h3 title="<%= vehicle.title %>">
+          <strong><%=vehicle.title%></strong>
+        </h3>
+      </a>
+      <h4></h4>
+      <h4><%= vehicle.year %>
+        <%= vehicle.transmission %></h4>
+      <h3>R$
+        <%= vehicle.value %></h3>
+        <% if current_user.present? %>
+        <div class="panel panel-default panel-color col-xs-12">
+          <div class="panel-body">
+            <div class="text-center">
+              <h5>
+                <strong>Opções</strong>
+              </h5>
+            </div>
+            <%= link_to '', vehicle, class: 'btn btn-danger btn-xs fa fa-remove', method: :delete, data: {confirm: 'Tem certeza?'}, title: 'Remover do Estoque' %>
+            <%= link_to '', edit_vehicle_path(vehicle), class: 'btn btn-primary btn-xs fa fa-pencil', title: 'Editar' %>
+            <% if vehicle.promotion == "Sim" %>
+            <a class="btn btn-xs btn-danger fa fa-star" href="/admin/removeDestaque/<%= vehicle.id %>" title="Remover dos Destaques"></a>
+            <% else %>
+            <a class="btn btn-primary btn-xs fa fa-star" href="/admin/addDestaque/<%= vehicle.id %>" title="Adicionar aos Destaques"></a>
+            <% end %>
+          </div>
+        </div>
+        <% end %>
+    </div>
+  </div>
+</div>
+<% end %>

@@ -1,0 +1,166 @@
+<%= render 'shared/nav' %>
+ <div class="page-container">
+  <div class="content">
+    <div class="container">
+      <div class="panel panel-default page-content">
+        <div class="panel-body">
+          <h5 class="pull-right">Veículo #<%= @vehicle.id %></h5>
+          <hr class="clear"/>
+          <div class="text-center">
+            <h1>
+              <strong><%=@vehicle.title %></strong>
+            </h1>
+            <h1 class="no-margin-no-padding" id="price">
+              <i class="fa fa-money"></i>
+              R$
+              <%= @vehicle.value %></h1>
+            <% if @vehicle.km == 0 %>
+            <h5>
+              <strong>
+                <i class="fa fa-road"></i>
+                0 Km.</strong>
+            </h5>
+            <% end %>
+            <h5>
+              <i class="fa fa-calendar"></i>
+              Disponível desde:
+              <%= @vehicle.created_at.strftime("%d/%m/%Y %H:%M") %>.</h5>
+          </div>
+          <div class="panel panel-default panel-color col-xs-12 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+            <div class="panel-body">
+              <div class="text-center">
+                <h4><strong>Xanxerê Veículos</strong></h4>
+              </div>
+              <div class="col-xs-4 text-center margin-small">
+                <i class="fa fa-map-marker fa-3x"></i>
+                <h5 class="no-margin-no-padding"><strong>Endereço</strong></h5>
+                <h5 class="no-margin-no-padding">Rua Doutor Nogueira Martins</h5>
+              </div>
+              <div class="col-xs-4 text-center margin-small">
+                <i class="fa fa-phone-square fa-3x"></i>
+                <h5 class="no-margin-no-padding"><strong>Telefone</strong></h5>
+                <h5 class="no-margin-no-padding">34541171</h5>
+              </div>
+              <div class="col-xs-4 text-center margin-small">
+                <i class="fa fa-envelope-square fa-3x"></i>
+                <h5 class="no-margin-no-padding"><strong>E-mail</strong></h5>
+                <h5 class="no-margin-no-padding">contato@xxe</h5>
+              </div>
+            </div>
+          </div>
+          <div class="page-content">
+            <div class="container">
+              <div class="row">
+                <div class="col-xs-12" id="slider">
+                  <div class="row">
+                    <div class="col-xs-12" id="carousel-bounding-box">
+                      <div class="carousel slide" id="myCarousel">
+                        <div class="carousel-inner">
+                          <% aux = 0 %>
+                          <% @vehicle.images.each do |image| %>
+                            <% if aux == 0 %>
+                            <div class="active item">
+                              <%= image_tag image.cover %></div>
+                            <% aux = 1 %>
+                            <% else %>
+                              <div class="item">
+                                <%= image_tag image.cover %>
+                              </div>
+                            <% end %>
+                          <% end %>
+                        </div>
+                        <a class="left carousel-control" data-slide="prev" href="#myCarousel" role="button">
+                          <span class="fa fa-chevron-left fa-3x"></span>
+                        </a>
+                        <a class="right carousel-control" data-slide="next" href="#myCarousel" role="button">
+                          <span class="fa fa-chevron-right fa-3x"></span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <div class="row hidden-xs col-sm-12" id="slider-thumbs">
+                <% number = 0 %>
+                <ul class="hide-bullets">
+                  <% @vehicle.images.each do |image| %>
+                  <li class="col-sm-4">
+                    <a class="thumbnail" id="carousel-selector-<%= number %>"><%= image_tag image.cover %></a>
+                  </li>
+                  <% number = number+1 %>
+                  <% end %>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr class="col-xs-12"/>
+        <legend>
+          <h4><strong>Informações sobre o veículo</strong></h4>
+        </legend>
+        <ul class="list-unstyled" id="list-about-vehicle">
+          <li>
+            <legend>
+              <h5><strong>Descrição</strong></h5>
+            </legend>
+            <p>
+              <%= @vehicle.description %>.
+            </p>
+            <hr>
+          </li>
+          <li>
+            <legend>
+              <h5><strong>Detalhes</strong></h5>
+            </legend>
+            <ul>
+              <li>
+                <strong>Valor:</strong> R$ <%= @vehicle.value %>.
+              </li>
+              <li>
+                <strong>Kilometragem:</strong> <%= @vehicle.km %>.
+              </li>
+              <li>
+                <strong>Combustível:</strong> <%= @vehicle.fuel %>.
+              </li>
+              <li>
+                <strong>Ano:</strong> <%= @vehicle.year %>.
+              </li>
+              <li>
+                <strong>Câmbio:</strong> <%= @vehicle.transmission %>.
+              </li>
+              <li>
+                <strong>Modelo:</strong> <%= @vehicle.model.name %>.
+              </li>
+              <li>
+                <strong>Categoria:</strong><%= @vehicle.category.name %>.
+              </li>
+            </ul>
+            <hr>
+          </li>
+          <li>
+            <legend>
+              <h5><strong>Opcionais</strong></h5>
+            </legend>
+            <% if @vehicle.optionals.blank? %>
+              <li>
+                Nenhum opcional.
+              </li>
+            <% else %>
+            <ul>
+              <% @vehicle.optionals.each do |optional| %>
+                <li>
+                  <%= optional.description %>.
+                </li>
+              <% end %>
+            </ul>
+            <% end %>
+            <hr>
+          </li>
+          <li>
+            <h5><strong>Código do veículo:</strong> <%= @vehicle.id %>.</h5>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <%= render 'shared/footer' %>
+</div>

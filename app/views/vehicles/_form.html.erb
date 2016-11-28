@@ -1,0 +1,124 @@
+<div class="panel panel-default col-xs-12 panel-color">
+  <div class="panel-body">
+    <%= form_for(@vehicle, :html => {multipart: true}) do |f| %>
+    <div class="form-horizontal">
+      <div class="panel panel-default col-xs-12 panel-color">
+        <div class="panel-body">
+          <legend>
+            Dados Gerais
+          </legend>
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="title">Veículo:</label>
+            <div class="col-sm-10">
+              <%= f.text_field :title, :placeholder => 'Nome do veículo', class: 'form-control', required: true %>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="description">Descrição</label>
+            <div class="col-sm-10">
+              <%= f.text_area :description, :placeholder => 'Descrição Geral (opcional)', class: 'form-control', id: 'text-area' %>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="model">Modelo:</label>
+            <div class="col-sm-10">
+              <%= f.collection_select(:model_id, @models, :id, :name, {include_blank: 'Selecione o modelo do veículo'}, {class: 'form-control', id: 'model_kind'}) %>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="category">Categoria</label>
+            <div class="col-sm-10">
+              <%= f.collection_select(:category_id, @categories, :id, :name, {include_blank: 'Selecione a categoria do veículo'}, {class: 'form-control', id: 'category_kind'}) %>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="promotion" class="control-label col-sm-2">Promoção?</label>
+            <div class="col-sm-10">
+              <%= f.select(:promotion, options_for_select([['Sim'], ['Não']]), {}, {class: 'form-control'}) %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default col-xs-12 panel-color">
+        <div class="panel-body">
+          <legend>
+            Detalhes
+          </legend>
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="value">Valor (R$):</label>
+            <div class="col-sm-10">
+              <%= f.number_field :value, :placeholder => 'Digite o valor do veículo', class: 'form-control', min: '0', step: '0.50', required: true %>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="km">Km:</label>
+            <div class="col-sm-10">
+              <%= f.number_field :km, :placeholder => 'Digite a kilometragem do veículo', class: 'form-control', min: '0', step: '0.250', required: true %>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="fuel">Combustível</label>
+            <div class="col-sm-10">
+              <%= f.select(:fuel, options_for_select([['Gasolina'], ['Flex'], ['Diesel']]), {}, {class: 'form-control'})%>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="year">Ano:</label>
+            <div class="col-sm-10">
+              <%= f.text_field :year, :placeholder => 'Digite o ano de fabricação do veículo', class: 'form-control', required: true %>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="color">Cor:</label>
+            <div class="col-sm-10">
+              <%= f.text_field :color, :placeholder => 'Digite a cor do veículo', class:"form-control", required: true %>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="transmission">Câmbio</label>
+            <div class="col-sm-10">
+              <%= f.select(:transmission, options_for_select([['Automático'],['Manual']]), {}, {class: 'form-control'}) %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default col-xs-12 panel-color">
+        <div class="panel-body">
+          <h3 class="no-margin-no-padding">Opcionais</h3>
+          <legend>
+            <small>Adicione os opcionais do veículo.</small>
+          </legend>
+          <div class="panel-body">
+            <%= f.simple_fields_for :optionals do |optional| %>
+            <%= render 'optionals_fields', :f => optional %>
+          </div>
+          <% end %>
+          <%= link_to_add_association ' Adicionar Opcional', f, :optionals, class: "btn btn-primary fa fa-plus-circle" %>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default col-xs-12 panel-color">
+      <div class="panel-body">
+        <h3 class="no-margin-no-padding">Imagens</h3>
+        <legend>
+          <small>Adicione imagens reais do veículo.</small>
+        </legend>
+        <div class="panel-body">
+          <%= f.simple_fields_for :images do |image| %>
+          <%= render 'image_fields', :f => image %>
+        </div>
+        <% end %>
+        <%= link_to_add_association ' Adicionar Imagem', f, :images, class: "btn btn-primary fa fa-plus-circle" %>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-xs-12 col-sm-4 col-sm-offset-5">
+      <button class="btn btn-primary" type="submit">
+        <i class="fa fa-save"></i>
+        Salvar</button>
+    </div>
+  </div>
+  <% end %>
+</div>
+</div>

@@ -1,0 +1,53 @@
+<%= render 'shared/nav' %>
+<div class="page-container">
+  <div class="content">
+    <div class="container">
+      <div class="panel panel-default col-xs-12 page-content">
+        <div class="panel-body">
+          <h1><i class="fa fa-file-pdf-o"></i> Relatórios do Estoque</h1>
+          <h4>Para impressão consulte a versão <a href="/admin/estoque.pdf">aqui</a> a versão pdf.</h4>
+          <hr/>
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <tr>
+                <td class="text-center">
+                  <strong>Veículo</strong>
+                </td>
+                <td class="text-center">
+                  <strong>Ano</strong>
+                </td>
+                <td class="text-center">
+                  <strong>Valor</strong>
+                </td>
+              </tr>
+              <% @vehicles.each do |vehicle| %>
+                <tr>
+                  <td class="text-center">
+                    <%= vehicle.title %>
+                  </td>
+                  <td class="text-center">
+                    <%= vehicle.year %>
+                  </td>
+                  <td class="text-center">
+                    <%= vehicle.value %>
+                  </td>
+                </tr>
+              <% end %>
+              <tr>
+                <td colspan="3">
+                  <h5 class="pull-right">Total de veículos: <%= @total_vehicles %>.</h5>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="3">
+                  <h5 class="pull-right">Total de patrimônio: R$ <%= @total_patrimonio %>.</h5>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%= render 'shared/footer' %>
+</div>

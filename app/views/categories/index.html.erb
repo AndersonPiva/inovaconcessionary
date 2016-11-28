@@ -1,0 +1,139 @@
+<%= render 'shared/nav' %>
+<div class="page-container">
+  <div class="content">
+    <div class="container page-content">
+      <ul class="list-inline">
+        <li>
+          <a href="/" title="Home"><i class="fa fa-home fa-2x"></i></a>
+        </li>
+        <li class="lead">
+          >
+        </li>
+        <li>
+          <a href="/admin" title="Gerenciar Concessionaria"><i class="fa fa-cogs fa-2x"></i></a>
+        </li>
+        <li class="lead">
+          >
+        </li>
+        <li>
+          <i class="fa fa-sitemap fa-2x" title="Categorias"></i>
+        </li>
+      </ul>
+      <div class="panel panel-default col-xs-12">
+        <div class="panel-body">
+          <h1 class="no-margin-no-padding">
+            <i class="fa fa-sitemap"></i>
+            Categorias</h1>
+          <h4>Gerencie as categorias do estoque de seus veículos, adicione novos, edite, exclua.</h4>
+          <div class="page-content">
+            <a class="btn btn-primary" id="new-category">
+              <i class="fa fa-plus-circle"></i>
+              Adicionar nova categoria</a>
+          </div>
+          <div class="page-content" id="div-new-category">
+            <%= render partial: 'categories/form', locals: {:@category => Category.new} %>
+          </div>
+          <div class="page-content col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+            <div class="form-horizontal">
+              <div class="form-group col-xs-10 col-sm-11">
+                <%= form_tag categories_path, method: :get do %>
+                <div class="col-sm-offset-1">
+                  <%= text_field_tag :query, params[:query], class: "form-control input-lg", id: "categories_search", :placeholder => 'Que categoria você está procurando?', autocomplete: "off" %>
+                </div>
+              </div>
+              <button class="btn btn-primary btn-lg" title="Pesquisar" type="submit">
+                <i class="fa fa-search"></i>
+              </button>
+              <% end %>
+            </div>
+          </div>
+          <% if flash[:update] != nil %>
+          <div class="col-xs-12 alert alert-warning alert-dismissible" role="alert">
+            <button class="close" data-dismiss="alert" type="button">
+              <span aria-hidden="true">&times;</span>
+              <span class="sr-only">Close</span>
+            </button>
+            <strong>Categoria editada com sucesso.</strong>
+          </div>
+          <% end %>
+          <% if flash[:warning] != nil %>
+          <div class="col-xs-12 alert alert-warning alert-dismissible" role="alert">
+            <button class="close" data-dismiss="alert" type="button">
+              <span aria-hidden="true">&times;</span>
+              <span class="sr-only">Close</span>
+            </button>
+            <strong>Categoria excluída com sucesso.</strong>
+          </div>
+          <% end %>
+          <% if flash[:error] != nil %>
+          <div class="col-xs-12 alert alert-warning alert-dismissible" role="alert">
+            <button class="close" data-dismiss="alert" type="button">
+              <span aria-hidden="true">&times;</span>
+              <span class="sr-only">Close</span>
+            </button>
+            <strong>Já existe uma categoria cadastrada com esse nome.</strong>
+          </div>
+          <% end %>
+          <% if flash[:info] != nil %>
+          <div class="col-xs-12 alert alert-warning alert-dismissible" role="alert">
+            <button class="close" data-dismiss="alert" type="button">
+              <span aria-hidden="true">&times;</span>
+              <span class="sr-only">Close</span>
+            </button>
+            <strong>Categoria Cadastrada com sucesso!</strong>
+          </div>
+          <% end %>
+          <% if @total_categories > 0 %>
+          <div class="table-responsive">
+            <div class="col-xs-12">
+              <% if flash[:notice] != nil %>
+              <div class="alert alert-warning alert-dismissible" role="alert">
+                <button class="close" data-dismiss="alert" type="button">
+                  <span aria-hidden="true">&times;</span>
+                  <span class="sr-only">Close</span>
+                </button>
+                <strong>Por favor em caso de busca digite uma categoria na caixa de pesquisa.</strong>
+              </div>
+              <% end %>
+              <h5>Você tem
+                <%= @total_categories%>
+                categorias de veículos.</h5>
+            </div>
+            <table class="table table-hover">
+              <tr>
+                <td class="text-center">
+                  <strong>Nome</strong>
+                </td>
+                <td class="text-center">
+                  <strong>Opções</strong>
+                </td>
+              </tr>
+              <% num = 0 %>
+              <% @categories.each do |category| %>
+              <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="myModal<%=num%>" role="dialog" tabindex="-1">
+                <%= render partial: 'categories/form', locals: {:@category => category} %>
+              </div>
+              <tr>
+                <td class="text-center">
+                  <%= category.name %>
+                </td>
+                <td class="text-center">
+                  <a class="btn btn-primary btn-xs fa fa-pencil" data-target="#myModal<%=num%>" data-toggle="modal" title="Editar"></a>
+                  <%= link_to '', category, class: 'btn btn-danger btn-xs fa fa-trash', method: :delete, data: {confirm: 'Tem certeza?'} %>
+                </td>
+              </tr>
+              <% num = num +1 %>
+              <% end %>
+            </table>
+          </div>
+          <% else %>
+          <div class="col-xs-12">
+            <h5>Nenhuma categoria encontrada.</h5>
+          </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%= render 'shared/footer' %>
+</div>

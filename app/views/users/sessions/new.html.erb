@@ -1,0 +1,44 @@
+<%= render 'shared/nav' %>
+<div class="page-container">
+  <div class="content">
+    <div class="container">
+      <div class="panel panel-default col-xs-12 col-sm-6 col-sm-offset-3" id="panel-login">
+        <div class="panel-body">
+          <div class="text-center">
+            <h4>Bem-Vindo. Realize seu login para gerenciar sua concessionária.</h4>
+            <img alt="user-circle" id="user-circle" src="/assets/user-circle.png">
+          </div>
+          <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <% if alert %>
+          <p class="alert alert-danger">
+            <%= alert %>
+          </p>
+          <% end %>
+          <div class="form-group input-group">
+            <label class="input-group-addon" for="email">
+              <i class="fa fa-envelope"></i>
+            </label>
+            <%= f.email_field :email, autofocus: true, class: 'form-control', :placeholder => 'Email' %>
+          </div>
+          <div class="form-group input-group">
+            <label class="input-group-addon" for="password">
+              <i class="fa fa-lock"></i>
+            </label>
+            <%= f.password_field :password, autocomplete: "off", class: 'form-control', :placeholder => 'Senha' %>
+          </div>
+          <% if devise_mapping.rememberable? -%>
+          <div class="field">
+            <%= f.check_box :remember_me %>
+            <label>Lembrar-me</label>
+          </div>
+          <% end -%>
+          <div class="help-block">
+            <button class="btn btn-primary btn-block" type="submit">Entrar</button>
+          </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%= render 'shared/footer' %>
+</div>

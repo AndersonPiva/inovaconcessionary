@@ -1,0 +1,11 @@
+<div class="nested-fields">
+  <div class="form-group input-group">
+    <label class="input-group-addon" for="optional">
+      <i class="fa fa-check-square-o"></i>
+    </label>
+    <div class="col-xs-11">
+      <%= f.text_field :description, :placeholder => 'Descreva o opcional', class: 'form-control', id: 'margin-optional', required: true %>
+    </div>
+    <%= link_to_remove_association "", f, class: "btn btn-danger btn-lg fa fa-remove", title: "Remover Opcional", id: 'margin-optional' %>
+  </div>
+</div>

@@ -1,0 +1,83 @@
+<%= render 'shared/nav' %>
+<div class="page-container">
+  <div class="content">
+    <div class="container">
+      <ul class="list-inline page-content">
+        <li>
+          <a href="/" title="home"><i class="fa fa-home fa-2x"></i></a>
+        </li>
+        <li class="lead">
+          >
+        </li>
+        <li>
+          <i class="fa fa-envelope fa-2x" title="Contato"></i>
+        </li>
+      </ul>
+      <div class="panel panel-default col-xs-12">
+        <div class="panel-body">
+          <h1 class="no-margin-no-padding">
+            <i class="fa fa-envelope"></i>
+            Contato</h1>
+          <h4>Em caso de dúvida, sugestão, crítica ou qualquer que seja o assunto, entre em contato conosco pelo formulário abaixo.</h4>
+          <div class="page-content">
+            <div class="col-xs-12 col-sm-4 text-center">
+              <i class="fa fa-map-marker fa fa-4x"></i>
+              <h5>
+                <strong>Endereço</strong><br/>Rua Doutor nogueira martins, 280, centro.</h5>
+            </div>
+            <div class="col-xs-12 col-sm-4 text-center">
+              <i class="fa fa-phone-square fa-4x"></i>
+              <h5>
+                <strong>Telefone</strong><br/>
+                49 3454-1171</h5>
+            </div>
+            <div class="col-xs-12 col-sm-4 text-center">
+              <i class="fa fa-mobile fa-4x"></i>
+              <h5>
+                <strong>Celular</strong><br/>
+                49 9993-2889</h5>
+            </div>
+          </div>
+          <div class="panel panel-default col-xs-12 page-content panel-color">
+            <div class="panel-body">
+                <%= form_for(@contact) do |f| %>
+              <div class="form-horizontal">
+                <div class="form-group">
+                  <label for="name" class="control-label col-sm-2">Nome:</label>
+                  <div class="col-sm-10">
+                    <%= f.text_field :name, :placeholder => 'Digite o seu nome', class: 'form-control' %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="email" class="control-label col-sm-2">E-mail:</label>
+                  <div class="col-sm-10">
+                      <%= f.email_field :email, :placeholder => 'Digite seu endereço de E-mail', class: 'form-control' %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="subject" class="control-label col-sm-2">Assunto:</label>
+                  <div class="col-sm-10">
+                    <%= f.select(:subject, options_for_select([['Dúvida'],['Sugestão'],['Crítica'],['Outro']]),{:include_blank => 'Selecione o Assunto'},{class: 'form-control'}) %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="message" class="control-label col-sm-2">Mensagem:</label>
+                  <div class="col-sm-10">
+                    <%= f.text_area :message, :placeholder => 'Digite a sua mensage', class: 'form-control', id: 'text-area' %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-xs-12 col-sm-4 col-sm-offset-5">
+                    <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
+                  </div>
+                </div>
+              </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%= render 'shared/footer' %>
+</div>

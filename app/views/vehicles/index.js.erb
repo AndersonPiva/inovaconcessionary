@@ -1,0 +1,6 @@
+$('.vehicles').append(' <%= escape_javascript(render partial: "vehicles/vehicles", :locals => { :vehicles => @vehicles }) %>');
+$('a.load-more-vehicles').attr('href', '/veiculos?page=<%= @vehicles.next_page %>');
+
+<%unless @vehicles.next_page %>
+$('a.load-more-vehicles').remove();
+<% end %>
