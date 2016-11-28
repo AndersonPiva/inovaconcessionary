@@ -4,8 +4,6 @@ class Vehicle < ActiveRecord::Base
   has_many :optionals, :dependent => :destroy
   has_many :images, :dependent => :destroy
 
-  searchkick autocomplete: ['title']
-
   accepts_nested_attributes_for :optionals
   accepts_nested_attributes_for :images
 

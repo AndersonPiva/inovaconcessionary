@@ -11,7 +11,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'twitter-bootstrap-rails'
 gem 'font-awesome-rails'
 gem 'devise'
-gem 'searchkick'
 gem 'simple_form'
 gem 'cocoon'
 gem 'paperclip'
