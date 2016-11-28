@@ -81,5 +81,5 @@ test:
 production:
   <<: *default
   database: projetoConcessionary_production
-  username: projetoConcessionary
-  password: <%= ENV['PROJETOCONCESSIONARY_DATABASE_PASSWORD'] %>
+  username: <%= ENV['BANCO_USER'] %>
+  password: <%= ENV['BANCO_PWD'] %>

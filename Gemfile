@@ -18,6 +18,8 @@ gem 'paperclip'
 gem 'wkhtmltopdf-binary'
 gem 'wicked_pdf'
 gem 'will_paginate', '~> 3.0.6'
+gem 'figaro'
+
 group :development, :test do
   gem 'byebug'
 end
