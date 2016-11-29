@@ -19,6 +19,15 @@
             <i class="fa fa-envelope"></i>
             Contato</h1>
           <h4>Em caso de dúvida, sugestão, crítica ou qualquer que seja o assunto, entre em contato conosco pelo formulário abaixo.</h4>
+          <% if flash[:notice] != nil %>
+          <div class="col-xs-12 alert alert-warning alert-dismissible" role="alert">
+            <button class="close" data-dismiss="alert" type="button">
+              <span aria-hidden="true">&times;</span>
+              <span class="sr-only">Close</span>
+            </button>
+            <strong>Sua mensagem foi enviada com sucesso. Agradecemos o seu contato.</strong>
+          </div>
+          <% end %>
           <div class="page-content">
             <div class="col-xs-12 col-sm-4 text-center">
               <i class="fa fa-map-marker fa fa-4x"></i>
