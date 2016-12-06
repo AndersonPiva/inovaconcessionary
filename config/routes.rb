@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get 'searchs/search'
 
-  devise_for :users, path: 'usuarios'
+  devise_for :users, path: 'usuarios', :skip => [:registrations] 
   resources :contacts, only: [:create], path: 'contato'
   resources :vehicles, path: 'veiculos'
   match '/admin/index', to: 'privates#index', via: [:get, :post]

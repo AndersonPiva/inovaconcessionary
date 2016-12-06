@@ -4,7 +4,7 @@
     <div class="text-center">
       <a href="/veiculos/<%= vehicle.to_param %>">
         <% vehicle.images.each do |image| %>
-        <%= image_tag image.cover.url(:medium), class: 'img-thumbnail' %>
+        <%= image_tag image.cover, class: 'img-thumbnail', id: 'img-vehicle' %>
         <% break %>
         <% end %>
         <h3 title="<%= vehicle.title %>">
@@ -15,7 +15,7 @@
       <h4><%= vehicle.year %>
         <%= vehicle.transmission %></h4>
       <h3>R$
-        <%= vehicle.value %></h3>
+        <%= vehicle.value %>0</h3>
         <% if current_user.present? %>
         <div class="panel panel-default panel-color col-xs-12">
           <div class="panel-body">

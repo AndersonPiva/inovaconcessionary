@@ -12,8 +12,7 @@
             </h1>
             <h1 class="no-margin-no-padding" id="price">
               <i class="fa fa-money"></i>
-              R$
-              <%= @vehicle.value %></h1>
+              <%= number_to_currency(@vehicle.value) %>
             <% if @vehicle.km == 0 %>
             <h5>
               <strong>
@@ -34,7 +33,7 @@
               <div class="col-xs-4 text-center margin-small">
                 <i class="fa fa-map-marker fa-3x"></i>
                 <h5 class="no-margin-no-padding"><strong>Endereço</strong></h5>
-                <h5 class="no-margin-no-padding">Rua Doutor Nogueira Martins</h5>
+                <h5 class="no-margin-no-padding">Rua Coronel Passos Maia, 427, Centro, Xanxerê.</h5>
               </div>
               <div class="col-xs-4 text-center margin-small">
                 <i class="fa fa-phone-square fa-3x"></i>
@@ -53,19 +52,19 @@
               <div class="row">
                 <div class="col-xs-12" id="slider">
                   <div class="row">
-                    <div class="col-xs-12" id="carousel-bounding-box">
+                    <div class="col-xs-6 col-xs-offset-3" id="carousel-bounding-box">
                       <div class="carousel slide" id="myCarousel">
                         <div class="carousel-inner">
                           <% aux = 0 %>
                           <% @vehicle.images.each do |image| %>
                             <% if aux == 0 %>
                             <div class="active item">
-                              <%= image_tag image.cover %></div>
+                              <%= image_tag image.cover%></div>
                             <% aux = 1 %>
                             <% else %>
-                              <div class="item">
-                                <%= image_tag image.cover %>
-                              </div>
+                            <div class="item">
+                              <%= image_tag image.cover %>
+                            </div>
                             <% end %>
                           <% end %>
                         </div>
@@ -113,7 +112,7 @@
             </legend>
             <ul>
               <li>
-                <strong>Valor:</strong> R$ <%= @vehicle.value %>.
+                <strong>Valor:</strong> <%= number_to_currency(@vehicle.value) %>
               </li>
               <li>
                 <strong>Kilometragem:</strong> <%= @vehicle.km %>.
